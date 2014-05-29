@@ -1,8 +1,43 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/canvas"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.se581.trackme.MainActivity"
-    tools:ignore="MergeRootFrame" />
+    android:orientation="vertical" >
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7" >
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.SupportMapFragment" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/button_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/action_bar"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:paddingBottom="20dp" >
+
+        <Button
+            android:id="@+id/button1"
+            style="@style/btnStylePaprika"
+            android:layout_width="199dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alpha="0.9"
+            android:onClick="onRecordButtonClick"
+            android:text="@string/button_start_record"
+            android:textStyle="normal"
+            android:typeface="normal" />
+    </LinearLayout>
+
+</LinearLayout>

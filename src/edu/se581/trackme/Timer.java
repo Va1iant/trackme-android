@@ -14,10 +14,13 @@ public class Timer {
 	Engine engine;
 	Handler handler;
 	Runnable thread;
-    
+	Map map;
 	
-	public Timer(Context context) {
+	boolean isRecording;
+    
+	public Timer(MainActivity context) {
 		
+		map = new Map(context);
 		engine = new Engine(context);
 		handler = new Handler();
 		thread = new Runnable() {
@@ -27,18 +30,33 @@ public class Timer {
 	            handler.postDelayed(this, GenParam.UpdateLoopInMilisec);
 	        }
 	    };
+	    
+	    isRecording = false;
 	}
 	
-	public void StartRecording()
+	public boolean StartRecording()
 	{
-		engine.StartSession();
-		handler.postDelayed(thread, GenParam.UpdateLoopInMilisec);
+		if(engine.StartSession())
+		{
+			handler.postDelayed(thread, GenParam.UpdateLoopInMilisec);
+			isRecording = true;
+			return true;
+		}
+		else
+			return false;
+		
 	}
 	
 	public void StopRecording()
 	{
 		handler.removeCallbacks(thread);
 		engine.StopSession();
+		isRecording = false;
+	}
+	
+	public boolean IsRecording()
+	{
+		return isRecording;
 	}
 
 }
